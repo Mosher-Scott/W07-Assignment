@@ -1,0 +1,59 @@
+﻿@page
+@model Scripture_Journal.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ScriptureNote</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ScriptureNote.Title" class="control-label"></label>
+                <input asp-for="ScriptureNote.Title" class="form-control" />
+                <span asp-validation-for="ScriptureNote.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScriptureNote.EntryDate" class="control-label"></label>
+                <input asp-for="ScriptureNote.EntryDate" class="form-control" />
+                <span asp-validation-for="ScriptureNote.EntryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScriptureNote.ScriptureBook" class="control-label"></label>
+                <input asp-for="ScriptureNote.ScriptureBook" class="form-control" />
+                <span asp-validation-for="ScriptureNote.ScriptureBook" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScriptureNote.ScriptureChapter" class="control-label"></label>
+                <input asp-for="ScriptureNote.ScriptureChapter" class="form-control" />
+                <span asp-validation-for="ScriptureNote.ScriptureChapter" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScriptureNote.ScriptureVerse" class="control-label"></label>
+                <input asp-for="ScriptureNote.ScriptureVerse" class="form-control" />
+                <span asp-validation-for="ScriptureNote.ScriptureVerse" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScriptureNote.JournalEntry" class="control-label"></label>
+                <input asp-for="ScriptureNote.JournalEntry" class="form-control" />
+                <span asp-validation-for="ScriptureNote.JournalEntry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

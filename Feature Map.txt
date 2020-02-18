@@ -1,0 +1,9 @@
+Tutorial			My Application
+Movie class			Journal class
+	ID					ID (Primary Key)
+	Title				Title
+	ReleaseDate			EntryDate
+	Genre				ScriptureBook
+	Price				ScriptureChapter
+						ScriptureVerse
+						ScriptureNote

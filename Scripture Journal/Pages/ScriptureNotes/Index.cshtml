@@ -1,0 +1,66 @@
+﻿@page
+@model Scripture_Journal.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].EntryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].ScriptureBook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].ScriptureChapter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].ScriptureVerse)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].JournalEntry)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ScriptureNote) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScriptureBook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScriptureChapter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ScriptureVerse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JournalEntry)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
