@@ -21,16 +21,19 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #4E8098;
+    background-color: white;
+    border-color: #4E8098;
+    margin-bottom: 10px;
 }
+
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -83,3 +86,4 @@ main {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
