@@ -43,14 +43,13 @@ namespace Scripture_Journal
 
         public async Task OnGetAsync()
         {
-
             // This section will search by Book Name
             if (!string.IsNullOrEmpty(BookSearchString))
             {
                 var BookNames = from b in _context.ScriptureNote
                                 select b;
 
-                BookNames = BookNames.Where(s => s.ScriptureBook.Contains(TitleSearchString));
+                BookNames = BookNames.Where(s => s.ScriptureBook.Contains(BookSearchString));
 
                 ScriptureNote = await BookNames.ToListAsync();
             }
@@ -65,6 +64,9 @@ namespace Scripture_Journal
 
                 ScriptureNote = await entryTitles.ToListAsync();
             }
+
+
+            // TODO: Add logic so if there is a search string, filter by the string & sort results
 
             // Sort results by book
             if (SortByBook == "true")
@@ -85,6 +87,7 @@ namespace Scripture_Journal
 
                 ScriptureNote = await allItems.ToListAsync();
             }
+
 
             // If both strings are empty, display everything
             else if(string.IsNullOrEmpty(BookSearchString) && string.IsNullOrEmpty(TitleSearchString))
