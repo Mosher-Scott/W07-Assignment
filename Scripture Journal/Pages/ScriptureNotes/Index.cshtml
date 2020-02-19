@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model Scripture_Journal.IndexModel
 
 @{
@@ -10,6 +10,36 @@
 <button class="btn-primary">
 <a asp-page="Create">Create New Journal Entry</a>
 </button>
+
+<form>
+    <p>Title: <input type="text" asp-for="TitleSearchString" />
+              <input type="submit" value="Filter" />
+    </p>  
+</form>
+<form>
+    <p>
+        Book Name: <input type="text" asp-for="BookSearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div id="filters">
+    <form>
+        <p>
+            <input type="hidden" asp-for="SortByBook" value="true" />
+            <input type="submit" value="Sort By Book" />
+        </p>
+    </form>
+
+    <form>
+        <p>
+            <input type="hidden" asp-for="SortByDate" value="true" />
+            <input type="submit" value="Sort By Date" />
+        </p>
+    </form>
+</div>
+
+
 <table class="table">
     <thead>
         <tr>
