@@ -23,6 +23,13 @@
     </p>
 </form>
 
+<form>
+    <select asp-for="SelectedBook" asp-items="Model.Books">
+        <option value="">All</option>
+    </select>
+    <input type="submit" value="Filter" />
+</form>
+
 <div id="filters">
     <form>
         <p>

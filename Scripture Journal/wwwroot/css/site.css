@@ -72,12 +72,14 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    background: #CED3DC;
+    background: #4E8098;
 }
 
 main {
-    background: #FCF7F8;
+    background: white;
     padding: 15px;
+    margin-bottom:150px;
+    height: 100vh;
 }
 .footer {
   position: absolute;
@@ -87,3 +89,76 @@ main {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/* TODO: Continue tweaking CSS */
+/* My CSS */
+h1 {
+    color: #4E8098;
+}
+
+section {
+    width: 100%;
+    padding: 15px;
+    height: 100%;
+}
+
+article {
+    background: white;
+    display: inline;
+    float: left;
+    width: 100%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.leftContent {
+    width: 200px;
+    margin-right: 50px;
+    display: inline-block;
+}
+
+.rightContent {
+    max-width: 500px;
+    display: inline-block;
+}
+
+section img {
+    max-width: 200px;
+}
+
+footer {
+    color: white;
+}
+
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+
+    section {
+        width: 100%;
+    }
+
+    article {
+        display: block;
+        width: 100%;
+        margin: auto;
+        margin-top: 15px;
+    }
+
+    .leftContent {
+        width: 100%;
+        margin-left: -15px;
+        padding-bottom: 15px;
+    }
+
+    .rightContent {
+        margin-left: 10%;
+    }
+
+    section img {
+        max-width: 50%;
+    }
+}

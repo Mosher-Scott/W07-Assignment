@@ -31,6 +31,7 @@ namespace Scripture_Journal
         public string BookSearchString { get; set; }
 
         public SelectList Books { get; set; }
+        [BindProperty(SupportsGet = true)]
         public string SelectedBook { get; set; }
 
         // For sorting results
@@ -42,6 +43,8 @@ namespace Scripture_Journal
         public string SortByDate { get; set; }
 
         public async Task OnGetAsync()
+
+            
         {
             // This section will search by Book Name
             if (!string.IsNullOrEmpty(BookSearchString))
@@ -64,6 +67,26 @@ namespace Scripture_Journal
 
                 ScriptureNote = await entryTitles.ToListAsync();
             }
+
+            // Create a dropdown list to search by book
+            IQueryable<string> bookQuery = from m in _context.ScriptureNote
+                                           orderby m.ScriptureBook
+                                           select m.ScriptureBook;
+
+            Books = new SelectList(await bookQuery.Distinct().ToListAsync());
+
+            if (!string.IsNullOrEmpty(SelectedBook))
+            {
+                var books = from b in _context.ScriptureNote
+                            select b;
+
+                books = books.Where(x => x.ScriptureBook == SelectedBook);
+
+                // TODO: Figure out why this isn't updating the list.  It is finding results
+                ScriptureNote = await books.ToListAsync();
+
+            }
+
 
 
             // TODO: Add logic so if there is a search string, filter by the string & sort results
