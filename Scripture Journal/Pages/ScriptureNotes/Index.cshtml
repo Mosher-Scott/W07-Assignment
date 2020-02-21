@@ -1,4 +1,5 @@
-﻿@page 
+﻿@page
+
 @model Scripture_Journal.IndexModel
 
 @{
@@ -8,13 +9,15 @@
 <h1>Journal Entries</h1>
 
 <button class="btn-primary">
-<a asp-page="Create">Create New Journal Entry</a>
+    <a asp-page="Create">Create New Journal Entry</a>
 </button>
 
+<!-- TODO: Put the fields into one form.  Use a select list to pick sorting by book or date.  Then when the for submits, have logic to decide what to search/sort by -->
 <form>
-    <p>Title: <input type="text" asp-for="TitleSearchString" />
-              <input type="submit" value="Filter" />
-    </p>  
+    <p>
+        Title: <input type="text" asp-for="TitleSearchString" />
+        <input type="submit" value="Filter" />
+    </p>
 </form>
 <form>
     <p>
@@ -51,7 +54,7 @@
     <thead>
         <tr>
             <th>
-            @Html.DisplayNameFor(model => model.ScriptureNote[0].ID)
+                @Html.DisplayNameFor(model => model.ScriptureNote[0].ID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ScriptureNote[0].Title)
@@ -75,35 +78,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ScriptureNote) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EntryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScriptureBook)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScriptureChapter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScriptureVerse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JournalEntry)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.ScriptureNote)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptureBook)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptureChapter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ScriptureVerse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JournalEntry)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

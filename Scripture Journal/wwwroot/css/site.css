@@ -9,6 +9,12 @@ for details on configuring this project to bundle and minify static web assets. 
     Light Blue: #90C2E7
 */
 
+/* Fonts
+    font-family: 'Montserrat', ;
+    font-family: 'Oxygen', ;
+
+*/
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -73,6 +79,7 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
     background: #4E8098;
+    font-family: 'Montserrat', sans-serif;
 }
 
 main {
@@ -93,6 +100,7 @@ main {
 /* My CSS */
 h1 {
     color: #4E8098;
+    font-family: 'Arvo', serif;
 }
 
 section {
@@ -131,7 +139,7 @@ footer {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 736px) {
     html {
         font-size: 16px;
     }
