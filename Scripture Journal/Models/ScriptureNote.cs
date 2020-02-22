@@ -14,7 +14,7 @@ namespace Scripture_Journal.Models
 
         // These hold the scripture book/chapter/verse info
         [Display(Name ="Book")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(20)]
+        //[RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(20)]
         public string ScriptureBook { get; set; }
 
         [Display(Name = "Chapter")]

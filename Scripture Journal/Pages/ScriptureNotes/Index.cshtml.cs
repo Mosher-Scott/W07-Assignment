@@ -43,31 +43,7 @@ namespace Scripture_Journal
         public string ClearFilter { get; set; }
 
         public async Task OnGetAsync()
-
-            
         {
-            // This section will search by Book Name
-            if (!string.IsNullOrEmpty(BookSearchString))
-            {
-                var BookNames = from b in _context.ScriptureNote
-                                select b;
-
-                BookNames = BookNames.Where(s => s.ScriptureBook.Contains(BookSearchString));
-
-                ScriptureNote = await BookNames.ToListAsync();
-            }
-
-            // This section will search by the journal entry title
-            if (!string.IsNullOrEmpty(TitleSearchString))
-            {
-                var entryTitles = from b in _context.ScriptureNote
-                                  select b;
-
-                entryTitles = entryTitles.Where(s => s.Title.Contains(TitleSearchString));
-
-                ScriptureNote = await entryTitles.ToListAsync();
-            }
-
             // Create a dropdown list to search by book
             IQueryable<string> bookQuery = from m in _context.ScriptureNote
                                            orderby m.ScriptureBook
@@ -75,48 +51,153 @@ namespace Scripture_Journal
 
             Books = new SelectList(await bookQuery.Distinct().ToListAsync());
 
-            if (!string.IsNullOrEmpty(SelectedBook))
-            {
-                var books = from b in _context.ScriptureNote
-                            select b;
+            // Create an empty linq statement for use in the switch statements
+            IQueryable<ScriptureNote> allItems;
 
-                books = books.Where(x => x.ScriptureBook == SelectedBook);
+            // If Title and Bookname are both empty
+            if (string.IsNullOrEmpty(TitleSearchString) && string.IsNullOrEmpty(BookSearchString))  {
 
-                // TODO: Figure out why this isn't updating the list.  It is finding results
-                ScriptureNote = await books.ToListAsync();
 
+                switch (SortedBy)
+                {
+                    case "book":
+                        allItems = from items in _context.ScriptureNote
+                                       orderby items.ScriptureBook ascending
+                                       select items;
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    case "date":
+                        allItems = from items in _context.ScriptureNote
+                                       orderby items.EntryDate ascending
+                                       select items;
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    default:
+                        allItems = from items in _context.ScriptureNote
+                                   select items;
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+                }
             }
 
-
-            // Sort results by book
-            if (SortedBy == "book")
+            // Filter by Note Title only
+            if (!string.IsNullOrEmpty(TitleSearchString) && string.IsNullOrEmpty(BookSearchString))
             {
-                var allItems = from notes in _context.ScriptureNote
-                               orderby notes.ScriptureBook ascending
-                               select notes;
 
-                ScriptureNote = await allItems.ToListAsync();
+                switch (SortedBy)
+                {
+                    case "book":
+                        allItems = from items in _context.ScriptureNote
+                                   orderby items.ScriptureBook ascending
+                                   select items;
+
+                        allItems = allItems.Where(s => s.Title.Contains(TitleSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    case "date":
+                        allItems = from items in _context.ScriptureNote
+                                   orderby items.EntryDate ascending
+                                   select items;
+
+                        allItems = allItems.Where(s => s.Title.Contains(TitleSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    default:
+                        allItems = from items in _context.ScriptureNote
+                                   select items;
+
+                        allItems = allItems.Where(s => s.Title.Contains(TitleSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+                }
             }
 
-            // Sort results by Date
-            if (SortedBy == "date")
+            // Filter by Book name only
+            if (string.IsNullOrEmpty(TitleSearchString) && !string.IsNullOrEmpty(BookSearchString))
             {
-                var allItems = from notes in _context.ScriptureNote
-                               orderby notes.EntryDate ascending
-                               select notes;
 
-                ScriptureNote = await allItems.ToListAsync();
+                switch (SortedBy)
+                {
+                    case "book":
+                        allItems = from items in _context.ScriptureNote
+                                   orderby items.ScriptureBook ascending
+                                   select items;
+
+                        allItems = allItems.Where(s => s.ScriptureBook.Contains(BookSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    case "date":
+                        allItems = from items in _context.ScriptureNote
+                                   orderby items.EntryDate ascending
+                                   select items;
+
+                        allItems = allItems.Where(s => s.ScriptureBook.Contains(BookSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    default:
+                        allItems = from items in _context.ScriptureNote
+                                   select items;
+
+                        allItems = allItems.Where(s => s.ScriptureBook == BookSearchString);
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+                }
             }
 
-
-            // If both strings are empty, display everything
-            else if(string.IsNullOrEmpty(BookSearchString) && string.IsNullOrEmpty(TitleSearchString) || ClearFilter == "true")
+            // Filter by Title and Book name
+            if (!string.IsNullOrEmpty(TitleSearchString) && !string.IsNullOrEmpty(BookSearchString))
             {
-                // Original
-                ScriptureNote = await _context.ScriptureNote.ToListAsync();
-            }
 
-           
+                switch (SortedBy)
+                {
+                    case "book":
+                        allItems = from items in _context.ScriptureNote
+                                   orderby items.ScriptureBook ascending
+                                   select items;
+
+                        allItems = allItems.Where(s => s.Title.Contains(TitleSearchString) && s.ScriptureBook.Contains(BookSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    case "date":
+                        allItems = from items in _context.ScriptureNote
+                                   orderby items.EntryDate ascending
+                                   select items;
+
+                        allItems = allItems.Where(s => s.Title.Contains(TitleSearchString) && s.ScriptureBook.Contains(BookSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+
+                    default:
+                        allItems = from items in _context.ScriptureNote
+                                   select items;
+
+                        allItems = allItems.Where(s => s.Title.Contains(TitleSearchString) && s.ScriptureBook.Contains(BookSearchString));
+
+                        ScriptureNote = await allItems.ToListAsync();
+                        break;
+                }
+            }
+         
         }
+
+        
     }
 }

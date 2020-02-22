@@ -15,6 +15,10 @@ for details on configuring this project to bundle and minify static web assets. 
 
 */
 
+* {
+    box-sizing: border-box;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
@@ -26,13 +30,18 @@ a {
     color: #4E8098;
 }
 
-.btn-primary {
-    color: #4E8098;
-    background-color: white;
-    border-color: #4E8098;
+.create-link {
+    color: white;
+    background-color: #007bff;
     margin-bottom: 10px;
+    width: 200px;
+    text-align: center;
+    padding: 5px;
 }
 
+.create-link a {
+    color: white;
+}
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
@@ -84,13 +93,14 @@ body {
 
 main {
     background: white;
-    padding: 15px;
+    padding: 0px 15px;
     margin-bottom:150px;
-    height: 100vh;
+    height: 90vh;
+    margin: 0px;
 }
 .footer {
   position: absolute;
-  bottom: 0;
+
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
@@ -105,36 +115,57 @@ h1 {
 
 section {
     width: 100%;
-    padding: 15px;
+    padding: 1rem 15px 0px 15px;
     height: 100%;
 }
 
 article {
     background: white;
-    display: inline;
-    float: left;
+    display: flex;
+    align-content: space-between;
+    justify-content: center;
     width: 100%;
     margin: auto;
-    margin-top: 15px;
-    text-align: center;
 }
 
-.leftContent {
-    width: 200px;
+.articleImage {
+    flex-grow: 1;
     margin-right: 50px;
+    margin-left: 50px;
     display: inline-block;
 }
 
-.rightContent {
-    max-width: 500px;
+.articleText {
+    flex-grow: 4;
     display: inline-block;
 }
 
 section img {
     max-width: 200px;
+    max-height: 200px;
 }
 
-footer {
+tbody {
+    display: block;
+    overflow: auto;
+    height: 40vh;
+}
+
+thead, tbody tr {
+    display:table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+thead {
+    width: calc( 100% - 1em )
+}
+
+table {
+    width: 400px;
+}
+
+footer p {
     color: white;
 }
 
@@ -147,6 +178,8 @@ footer {
 
     section {
         width: 100%;
+        overflow: scroll;
+        height: 70vh;
     }
 
     article {
@@ -169,4 +202,82 @@ footer {
     section img {
         max-width: 50%;
     }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+
+    }
+
+    .table td, .table th {
+        padding: 0px 0rem 0px 6rem;
+
+        border-top: 1px solid #dee2e6;
+    }
+
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+
+    tr {
+        border-top: 2px solid #4E8098;
+        border-left: 2px solid #4E8098;
+        border-right: 2px solid #4E8098;
+    }
+
+    td {
+        position: relative;
+        padding-left: 50%;
+    }
+
+        td:before {
+            position: absolute;
+            top: 0px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+        }
+
+        td:before{
+            font-weight: 700;
+        }
+
+        td:nth-of-type(1):before { content: "ID: "; }
+        td:nth-of-type(2):before {
+            content: "Title: ";
+        }
+        td:nth-of-type(3):before {
+            content: "Entry Date: ";
+        }
+        td:nth-of-type(4):before {
+            content: "Book: ";
+        }
+        td:nth-of-type(5):before {
+            content: "Chapter: ";
+        }
+        td:nth-of-type(6):before {
+            content: "Verse: ";
+        }
+        td:nth-of-type(7):before {
+            content: "Notes: ";
+        }
+        td:nth-of-type(8):before {
+            content: "Options: ";
+        }
+
+    .container {
+        overflow: scroll;
+        height: auto;
+    }
+
+    .form-group {
+        margin-bottom: 0px;
+    }
+
+    form {
+        padding-bottom: 10px;
+    }
+
 }
