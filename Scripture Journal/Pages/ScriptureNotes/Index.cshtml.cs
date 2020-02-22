@@ -36,11 +36,11 @@ namespace Scripture_Journal
 
         // For sorting results
         [BindProperty(SupportsGet = true)]
-        public string SortByBook { get; set; }
+        public string SortedBy { get; set; }
 
         // For sorting results
         [BindProperty(SupportsGet = true)]
-        public string SortByDate { get; set; }
+        public string ClearFilter { get; set; }
 
         public async Task OnGetAsync()
 
@@ -88,11 +88,8 @@ namespace Scripture_Journal
             }
 
 
-
-            // TODO: Add logic so if there is a search string, filter by the string & sort results
-
             // Sort results by book
-            if (SortByBook == "true")
+            if (SortedBy == "book")
             {
                 var allItems = from notes in _context.ScriptureNote
                                orderby notes.ScriptureBook ascending
@@ -102,7 +99,7 @@ namespace Scripture_Journal
             }
 
             // Sort results by Date
-            if (SortByDate == "true")
+            if (SortedBy == "date")
             {
                 var allItems = from notes in _context.ScriptureNote
                                orderby notes.EntryDate ascending
@@ -113,7 +110,7 @@ namespace Scripture_Journal
 
 
             // If both strings are empty, display everything
-            else if(string.IsNullOrEmpty(BookSearchString) && string.IsNullOrEmpty(TitleSearchString))
+            else if(string.IsNullOrEmpty(BookSearchString) && string.IsNullOrEmpty(TitleSearchString) || ClearFilter == "true")
             {
                 // Original
                 ScriptureNote = await _context.ScriptureNote.ToListAsync();

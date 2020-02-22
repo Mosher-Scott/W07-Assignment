@@ -12,43 +12,30 @@
     <a asp-page="Create">Create New Journal Entry</a>
 </button>
 
+<hr />
 <!-- TODO: Put the fields into one form.  Use a select list to pick sorting by book or date.  Then when the for submits, have logic to decide what to search/sort by -->
-<form>
-    <p>
-        Title: <input type="text" asp-for="TitleSearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
-<form>
-    <p>
-        Book Name: <input type="text" asp-for="BookSearchString" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+<form id="newForm">
+    <p>Title: <input type="text" asp-for="TitleSearchString" /></p>
 
-<form>
-    <select asp-for="SelectedBook" asp-items="Model.Books">
+    <span>Book Name: </span><select asp-for="BookSearchString" asp-items="Model.Books">
         <option value="">All</option>
     </select>
+    <br />
+    <span>Sort By: </span><select id="SortedByList" asp-for="SortedBy">
+        <option value="default">ID (Default)</option>
+        <option value="book">Book</option>
+        <option value="date">Date Added</option>
+    </select>
+
     <input type="submit" value="Filter" />
 </form>
-
-<div id="filters">
-    <form>
-        <p>
-            <input type="hidden" asp-for="SortByBook" value="true" />
-            <input type="submit" value="Sort By Book" />
-        </p>
-    </form>
-
-    <form>
-        <p>
-            <input type="hidden" asp-for="SortByDate" value="true" />
-            <input type="submit" value="Sort By Date" />
-        </p>
-    </form>
-</div>
-
+<hr />
+<form id="clearResults">
+    <p>
+        <input type="hidden" asp-for="ClearFilter" value="true" />
+        <input type="submit" value="Clear Filters" />
+    </p>
+</form>
 
 <table class="table">
     <thead>
