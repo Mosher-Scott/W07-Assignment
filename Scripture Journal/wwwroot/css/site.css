@@ -182,6 +182,10 @@ footer p {
         height: 70vh;
     }
 
+    main {
+        height: 100vh;
+    }
+
     article {
         display: block;
         width: 100%;
